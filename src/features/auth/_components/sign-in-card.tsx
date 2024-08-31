@@ -1,9 +1,10 @@
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
 import { useState } from "react";
 import { useAuthActions } from "@convex-dev/auth/react";
 
-import { Button } from "@/components/ui/button";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
+import { TriangleAlert } from "lucide-react";
+
 import {
   Card,
   CardContent,
@@ -13,8 +14,9 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+
 import { SignInUpState } from "../types";
-import { TriangleAlert } from "lucide-react";
 
 export const SignInCard = ({ setState }: SignInUpState) => {
   const { signIn } = useAuthActions();
@@ -28,14 +30,14 @@ export const SignInCard = ({ setState }: SignInUpState) => {
     e.preventDefault();
 
     setPending(true);
-    signIn("password", {email, password, flow: "signIn"})
+    signIn("password", { email, password, flow: "signIn" })
       .catch(() => {
-        setError("Invalid email or password")
+        setError("Invalid email or password");
       })
       .finally(() => {
         setPending(false);
       });
-  }
+  };
 
   const onProviderSignIn = (value: "github" | "google") => {
     setPending(true);
@@ -54,7 +56,7 @@ export const SignInCard = ({ setState }: SignInUpState) => {
       </CardHeader>
       {!!error && (
         <div className="bg-destructive/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-destructive mb-6">
-          <TriangleAlert className="size-4"/> 
+          <TriangleAlert className="size-4" />
           <p>{error}</p>
         </div>
       )}
@@ -79,12 +81,7 @@ export const SignInCard = ({ setState }: SignInUpState) => {
             type="pasword"
             required
           />
-          <Button
-            type="submit"
-            className="w-full"
-            size="lg"
-            disabled={pending}
-          >
+          <Button type="submit" className="w-full" size="lg" disabled={pending}>
             Continue
           </Button>
         </form>

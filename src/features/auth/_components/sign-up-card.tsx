@@ -25,7 +25,7 @@ export const SignUpCard = ({ setState }: SignInUpState) => {
   const [error, setError] = useState<string>("");
   const [pending, setPending] = useState<boolean>(false);
 
-  const onProviderSignIn = (value: "github" | "google") => {
+  const onProviderSignUp = (value: "github" | "google") => {
     setPending(true);
     signIn(value).finally(() => {
       setPending(false);
@@ -35,23 +35,21 @@ export const SignUpCard = ({ setState }: SignInUpState) => {
   return (
     <Card className="w-full h-full p-8">
       <CardHeader className="px-0 pt-0">
-        <CardTitle>
-          Sign up to Continue
-        </CardTitle>
+        <CardTitle>Sign up to Continue</CardTitle>
         <CardDescription>
           Use another your email or another service to continue
         </CardDescription>
       </CardHeader>
       {!!error && (
         <div className="bg-destructive/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-destructive mb-6">
-          <TriangleAlert className="size-4"/> 
+          <TriangleAlert className="size-4" />
           <p>{error}</p>
         </div>
       )}
       <CardContent className="space-y-5 px-0 pb-0">
         <form className="space-y-2.5">
           <Input
-            disabled={false}
+            disabled={pending}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="email"
@@ -61,7 +59,7 @@ export const SignUpCard = ({ setState }: SignInUpState) => {
             aria-label="Email Input"
           />
           <Input
-            disabled={false}
+            disabled={pending}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="password"
@@ -69,7 +67,7 @@ export const SignUpCard = ({ setState }: SignInUpState) => {
             required
           />
           <Input
-            disabled={false}
+            disabled={pending}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Confirm password"
@@ -77,38 +75,28 @@ export const SignUpCard = ({ setState }: SignInUpState) => {
             required
             pattern={password}
           />
-          <Button
-            type="submit"
-            className="w-full"
-            size="lg"
-            disabled={
-              !(
-                email.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/) &&
-                password === confirmPassword
-              )
-            }
-          >
+          <Button type="submit" className="w-full" size="lg" disabled={pending}>
             Continue
           </Button>
         </form>
         <Separator />
         <div className="flex flex-col gap-y-2.5">
           <Button
-            onClick={() => onProviderSignIn("google")}
+            onClick={() => onProviderSignUp("google")}
             variant="outline"
             className="w-full relative"
             size="lg"
-            disabled={false}
+            disabled={pending}
           >
             <FcGoogle className="size-5 absolute left-2.5 top-3" />
             Continue with Google
           </Button>
           <Button
-            onClick={() => onProviderSignIn("github")}
+            onClick={() => onProviderSignUp("github")}
             variant="outline"
             className="w-full relative"
             size="lg"
-            disabled={false}
+            disabled={pending}
           >
             <FaGithub className="size-5 absolute left-2.5 top-3" />
             Continue with Github
