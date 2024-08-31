@@ -13,11 +13,24 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { SignInUpState } from "../types";
 import { useState } from "react";
+import { useAuthActions } from "@convex-dev/auth/react";
+import { TriangleAlert } from "lucide-react";
 
 export const SignUpCard = ({ setState }: SignInUpState) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const { signIn } = useAuthActions();
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [pending, setPending] = useState<boolean>(false);
+
+  const onProviderSignIn = (value: "github" | "google") => {
+    setPending(true);
+    signIn(value).finally(() => {
+      setPending(false);
+    });
+  };
 
   return (
     <Card className="w-full h-full p-8">
@@ -29,6 +42,12 @@ export const SignUpCard = ({ setState }: SignInUpState) => {
           Use another your email or another service to continue
         </CardDescription>
       </CardHeader>
+      {!!error && (
+        <div className="bg-destructive/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-destructive mb-6">
+          <TriangleAlert className="size-4"/> 
+          <p>{error}</p>
+        </div>
+      )}
       <CardContent className="space-y-5 px-0 pb-0">
         <form className="space-y-2.5">
           <Input
@@ -75,7 +94,7 @@ export const SignUpCard = ({ setState }: SignInUpState) => {
         <Separator />
         <div className="flex flex-col gap-y-2.5">
           <Button
-            onClick={() => {}}
+            onClick={() => onProviderSignIn("google")}
             variant="outline"
             className="w-full relative"
             size="lg"
@@ -85,7 +104,7 @@ export const SignUpCard = ({ setState }: SignInUpState) => {
             Continue with Google
           </Button>
           <Button
-            onClick={() => {}}
+            onClick={() => onProviderSignIn("github")}
             variant="outline"
             className="w-full relative"
             size="lg"
