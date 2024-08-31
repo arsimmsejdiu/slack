@@ -17,11 +17,15 @@ import { SignInUpState } from "../types";
 
 export const SignInCard = ({ setState }: SignInUpState) => {
   const { signIn } = useAuthActions();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [pending, setPending] = useState<boolean>(false);
 
   const onProviderSignIn = (value: "github" | "google") => {
-    signIn(value);
+    setPending(true);
+    signIn(value).finally(() => {
+      setPending(false);
+    });
   };
 
   return (
@@ -35,7 +39,7 @@ export const SignInCard = ({ setState }: SignInUpState) => {
       <CardContent className="space-y-5 px-0 pb-0">
         <form className="space-y-2.5">
           <Input
-            disabled={false}
+            disabled={pending}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="email"
@@ -46,7 +50,7 @@ export const SignInCard = ({ setState }: SignInUpState) => {
           />
 
           <Input
-            disabled={false}
+            disabled={pending}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="password"
@@ -57,12 +61,7 @@ export const SignInCard = ({ setState }: SignInUpState) => {
             type="submit"
             className="w-full"
             size="lg"
-            disabled={
-              !(
-                email.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/) &&
-                password
-              )
-            }
+            disabled={pending}
           >
             Continue
           </Button>
@@ -74,7 +73,7 @@ export const SignInCard = ({ setState }: SignInUpState) => {
             variant="outline"
             className="w-full relative"
             size="lg"
-            disabled={false}
+            disabled={pending}
           >
             <FcGoogle className="size-5 absolute left-2.5 top-3" />
             Continue with Google
@@ -84,7 +83,7 @@ export const SignInCard = ({ setState }: SignInUpState) => {
             variant="outline"
             className="w-full relative"
             size="lg"
-            disabled={false}
+            disabled={pending}
           >
             <FaGithub className="size-5 absolute left-2.5 top-3" />
             Continue with Github
