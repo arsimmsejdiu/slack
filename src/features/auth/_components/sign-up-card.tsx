@@ -19,6 +19,7 @@ import { TriangleAlert } from "lucide-react";
 export const SignUpCard = ({ setState }: SignInUpState) => {
   const { signIn } = useAuthActions();
 
+  const [name, setName] = useState<string>("")
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -33,7 +34,7 @@ export const SignUpCard = ({ setState }: SignInUpState) => {
       return;
     }
     setPending(true);
-    signIn("password", { email, password, flow: "signUp" })
+    signIn("password", { name, email, password, flow: "signUp" })
       .catch(() => {
         setError("Something went wrong");
       })
@@ -65,6 +66,15 @@ export const SignUpCard = ({ setState }: SignInUpState) => {
       )}
       <CardContent className="space-y-5 px-0 pb-0">
         <form onSubmit={onPasswordSignUp} className="space-y-2.5">
+          <Input 
+            disabled={pending}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Full Name"
+            type="text"
+            required
+            aria-label="Name Input"
+          />
           <Input
             disabled={pending}
             value={email}

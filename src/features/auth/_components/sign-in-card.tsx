@@ -78,7 +78,7 @@ export const SignInCard = ({ setState }: SignInUpState) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="password"
-            type="pasword"
+            type="password"
             required
           />
           <Button type="submit" className="w-full" size="lg" disabled={pending}>
