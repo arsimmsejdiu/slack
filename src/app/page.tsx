@@ -1,7 +1,7 @@
 "use client";
 
 import { UserButton } from "@/features/auth/_components/user-button";
-import { useCreateWorkspaceModal } from "@/features/store/UseCreateModal";
+import { useCreateWorkspaceModal } from "@/features/workspaces/store/UseCreateModal";
 import { useGetWorkspaces } from "@/features/workspaces/api/use-get-workspaces";
 import { Loader } from "lucide-react";
 import { useEffect, useMemo } from "react";
