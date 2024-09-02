@@ -1,11 +1,13 @@
 "use client";
 
 import { UserButton } from "@/features/auth/_components/user-button";
+import { useCreateWorkspaceModal } from "@/features/store/UseCreateModal";
 import { useGetWorkspaces } from "@/features/workspaces/api/use-get-workspaces";
 import { Loader } from "lucide-react";
 import { useEffect, useMemo } from "react";
 
 export default function Home() {
+  const [open, setOpen] = useCreateWorkspaceModal();
   const { data, isLoading } = useGetWorkspaces();
 
   const workspaceId = useMemo(() => data?.[0]?._id, [data]);
@@ -15,11 +17,11 @@ export default function Home() {
 
     if (workspaceId) {
       // window.location.href = `/workspace/${workspaceId}`;
-      console.log("REdirect to workspace");
-    } else {
-      console.log("Open Create Workspace modal");
+      console.log("Redirect to workspace");
+    } else if (!open){
+      setOpen(true)
     }
-  }, [workspaceId, isLoading]);
+  }, [workspaceId, isLoading, open, setOpen]);
 
   if (isLoading) {
     return <Loader className="space-4 animate-spin text-muted-foreground" />;
