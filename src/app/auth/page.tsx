@@ -1,4 +1,4 @@
-import { AuthScreen } from "@/features/auth/_components/auth-screen"
+import { AuthScreen } from "@/features/auth/components/auth-screen"
 
  const AuthPage = () => {
     return <AuthScreen />
