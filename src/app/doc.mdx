@@ -1,0 +1,27 @@
+(src/app/page.tsx - line: 22)
+
+```tsx
+router.replace(`/workspace/${workspaceId}`); 
+```
+
+-> `router.replace` is a method provided by Next.js's routing system. It's used to navigate to a new URL, 
+replacing the current history entry instead of adding a new one. Here's a breakdown of what it does and its benefits:
+
+1. Navigation: It navigates to the specified URL (`/workspace/${workspaceId}` in this case).
+
+2. History replacement: Unlike `router.push`, which adds a new entry to the browser's history stack, `router.replace` replaces the current history entry.
+
+Benefits of using `router.replace`:
+
+1. Prevents back navigation: Since it replaces the current history entry, users can't navigate back to the previous page using the browser's back button. 
+This is useful when you want to ensure users don't return to a specific page (like a login or intermediate page).
+
+2. Cleaner browsing history: It keeps the browser history cleaner by not adding unnecessary entries for intermediate pages or redirects.
+
+3. Improved user experience: In scenarios where you're redirecting users automatically (as in this case), 
+using `replace` ensures they don't get stuck in a loop if they try to go back.
+
+4. Memory efficiency: By not adding new entries to the history stack, it can be slightly more memory-efficient, especially in scenarios with frequent navigations.
+
+In the context of your code, `router.replace` is used to redirect the user to their workspace page once a workspace is available. 
+Using `replace` here ensures that if the user tries to go back, they won't return to this intermediate loading page, providing a smoother user experience.

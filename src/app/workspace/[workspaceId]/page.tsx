@@ -17,9 +17,9 @@ const WorkspaceIdPage = ({ params }: WorkspaceIdPageProps) => {
 
   return (
     <div>
-      <h1>Workspace {params.workspaceId}</h1>
+      <h1>Workspace ID: {params.workspaceId}</h1>
       {data?.map((workspace) => (
-        <div key={workspace._id}>{workspace.name}</div>
+        <div key={workspace._id}>Workspace Name: {workspace.name}</div>
       ))}
     </div>
   );

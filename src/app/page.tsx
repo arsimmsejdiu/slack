@@ -3,10 +3,13 @@
 import { UserButton } from "@/features/auth/components/user-button";
 import { useCreateWorkspaceModal } from "@/features/workspaces/store/UseCreateModal";
 import { useGetWorkspaces } from "@/features/workspaces/api/use-get-workspaces";
+
 import { Loader } from "lucide-react";
 import { useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   const [open, setOpen] = useCreateWorkspaceModal();
   const { data, isLoading } = useGetWorkspaces();
 
@@ -16,20 +19,15 @@ export default function Home() {
     if (isLoading) return;
 
     if (workspaceId) {
-      // window.location.href = `/workspace/${workspaceId}`;
-      console.log("Redirect to workspace");
+      router.replace(`/workspace/${workspaceId}`);
     } else if (!open){
       setOpen(true)
     }
-  }, [workspaceId, isLoading, open, setOpen]);
+  }, [workspaceId, isLoading, open, setOpen, router]);
 
   if (isLoading) {
     return <Loader className="space-4 animate-spin text-muted-foreground" />;
   }
-
-  // if (!data) {
-  //   return null;
-  // }
 
   return (
     <div className="flex flex-row items-center justify-center">
