@@ -1,15 +1,12 @@
 "use client";
 
-import { useGetWorkspaces } from "@/features/workspaces/api/use-get-workspaces";
+import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
+import { useWorkspaceId } from "@/hooks/UseWorkspaceId";
 import { Loader } from "lucide-react";
 
-interface WorkspaceIdPageProps {
-  params: {
-    workspaceId: string;
-  };
-}
-const WorkspaceIdPage = ({ params }: WorkspaceIdPageProps) => {
-  const { data, isLoading } = useGetWorkspaces();
+const WorkspaceIdPage = () => {
+  const workspaceId = useWorkspaceId();
+  const { data, isLoading } = useGetWorkspace({ workspaceId });
 
   if (isLoading) {
     return <Loader className="space-4 animate-spin text-muted-foreground" />;
@@ -17,10 +14,8 @@ const WorkspaceIdPage = ({ params }: WorkspaceIdPageProps) => {
 
   return (
     <div>
-      <h1>Workspace ID: {params.workspaceId}</h1>
-      {data?.map((workspace) => (
-        <div key={workspace._id}>Workspace Name: {workspace.name}</div>
-      ))}
+      <h1>Workspace ID: {workspaceId}</h1>
+      <h1>Workspace Name: {JSON.stringify(data)}</h1>
     </div>
   );
 };
