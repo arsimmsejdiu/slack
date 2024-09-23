@@ -14,28 +14,36 @@ import { useGetWorkspaces } from "@/features/workspaces/api/use-get-workspaces";
 import { useCreateWorkspaceModal } from "@/features/workspaces/store/UseCreateModal";
 import { useWorkspaceId } from "@/hooks/UseWorkspaceId";
 import { useRouter } from "next/navigation";
-
+import { ActionTooltip } from "@/components/ActionTooltip";
 
 export const WorkspaceSwitcher = () => {
   const router = useRouter();
   const workspaceId = useWorkspaceId();
   const [_isOpen, setIsOpen] = useCreateWorkspaceModal();
 
-  const { data: workspace, isLoading: workspaceLoading } = useGetWorkspace({ workspaceId });
+  const { data: workspace, isLoading: workspaceLoading } = useGetWorkspace({
+    workspaceId,
+  });
   const { data: workspaces, isLoading: workspacesLoading } = useGetWorkspaces();
 
-  const filteredWorkspaces = workspaces?.filter((workspace) => workspace._id !== workspaceId);
+  const filteredWorkspaces = workspaces?.filter(
+    (workspace) => workspace._id !== workspaceId
+  );
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button className="size-9 relative overflow-hidden bg-[#ABABAD] hover:bg-[#ABABAD]/80 text-slate-800 font-semibold text-xl">
-          {workspaceLoading ? (<Loader className="size-5 animate-spin shrink-0"/>) : workspace?.name.charAt(0).toUpperCase()}
+          {workspaceLoading ? (
+            <Loader className="size-5 animate-spin shrink-0" />
+          ) : (
+            workspace?.name.charAt(0).toUpperCase()
+          )}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent side="bottom" align="start" className="w-[64]">
         <DropdownMenuItem
-        onClick={() => router.push(`/workspace/${workspaceId}`)}
+          onClick={() => router.push(`/workspace/${workspaceId}`)}
           className="cursor-pointer flex-col justify-start items-start capitalize"
         >
           {workspace?.name}
@@ -55,7 +63,10 @@ export const WorkspaceSwitcher = () => {
             <p className="truncate">{workspace?.name}</p>
           </DropdownMenuItem>
         ))}
-        <DropdownMenuItem onClick={() => setIsOpen(true)} className="cursor-pointer">
+        <DropdownMenuItem
+          onClick={() => setIsOpen(true)}
+          className="cursor-pointer"
+        >
           <div className="size-9 relative overflow-hidden bg-[#f2f2f2] text-slate-800 font-semibold text-lg rounded-md flex items-center justify-center mr-2">
             <Plus className="size-5" />
           </div>

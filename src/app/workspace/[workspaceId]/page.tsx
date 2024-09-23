@@ -15,7 +15,6 @@ const WorkspaceIdPage = () => {
   return (
     <div>
       <h1>Workspace ID: {workspaceId}</h1>
-      <h1>Workspace Name: {JSON.stringify(data)}</h1>
     </div>
   );
 };
