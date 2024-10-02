@@ -1,16 +1,7 @@
 import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { auth } from "./auth";
-
-// generate join code
-const generateJoinCode = () => {
-  const code = Array.from(
-    { length: 6 },
-    () => "0123456789abcdefghijklmnopqrstuvwxyz"[Math.floor(Math.random() * 36)]
-  ).join("");
-
-  return code
-};
+import { generateJoinCode } from "../src/lib/utils";
 
 export const create = mutation({
   args: {
