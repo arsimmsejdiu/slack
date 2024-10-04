@@ -14,7 +14,6 @@ import { useGetWorkspaces } from "@/features/workspaces/api/use-get-workspaces";
 import { useCreateWorkspaceModal } from "@/features/workspaces/store/UseCreateModal";
 import { useWorkspaceId } from "@/hooks/UseWorkspaceId";
 import { useRouter } from "next/navigation";
-import { ActionTooltip } from "@/components/ActionTooltip";
 
 export const WorkspaceSwitcher = () => {
   const router = useRouter();

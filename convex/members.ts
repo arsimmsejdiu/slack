@@ -8,7 +8,7 @@ export const current = query({
     const userId = await auth.getUserId(ctx);
 
     if (!userId) {
-      return { status: "unauthenticated", message: "User is not logged in" };
+      return null;
     }
 
     const member = await ctx.db
@@ -16,15 +16,12 @@ export const current = query({
       .withIndex("by_workspace_id_user_id", (q) =>
         q.eq("workspaceId", args.workspaceId).eq("userId", userId)
       )
-      .collect();
+      .unique();
 
     if (!member) {
-      return {
-        status: "not_found",
-        message: "User is not a member of this workspace",
-      };
+      return null;
     }
 
-    return { status: "success", member };
+    return member;
   },
 });
