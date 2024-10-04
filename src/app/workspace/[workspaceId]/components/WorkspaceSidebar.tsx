@@ -32,7 +32,7 @@ export const WorkspaceSidebar = () => {
 
   return (
     <div className="flex flex-col gap-y-2 bg-[#5E2C5F] h-full ">
-      <WorkspaceHeader />
+      <WorkspaceHeader workspace={workspace}/>
     </div>
   );
 };
