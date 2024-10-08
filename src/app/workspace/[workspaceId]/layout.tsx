@@ -8,9 +8,9 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
 
-const Toolbar = dynamic(() => import("./components").then((mod) => mod.Toolbar)); //lazy loading
-const Sidebar = dynamic(() => import("./components").then((mod) => mod.Sidebar)); //lazy loading
-const WorkspaceSidebar = dynamic(() => import("./components").then((mod) => mod.WorkspaceSidebar)); //Lazy Loading
+const Toolbar = dynamic(() => import("./components/Toolbar").then((mod) => mod.Toolbar)); //lazy loading
+const Sidebar = dynamic(() => import("./components/Sidebar").then((mod) => mod.Sidebar)); //lazy loading
+const WorkspaceSidebar = dynamic(() => import("./components/WorkspaceSidebar").then((mod) => mod.WorkspaceSidebar)); //Lazy Loading
 
 interface WorkspaceIdLayoutProps {
   children: React.ReactNode;
