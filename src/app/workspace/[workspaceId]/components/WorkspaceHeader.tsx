@@ -7,8 +7,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Doc } from "../../../../../convex/_generated/dataModel";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ListFilter, SquarePen } from "lucide-react";
 import { WorkspaceTexts } from "@/models/WorkspaceText";
+import { ActionTooltip } from "@/components/ActionTooltip";
 
 interface WorkspaceHeaderProps {
   workspace: Doc<"workspaces">;
@@ -64,6 +65,18 @@ export const WorkspaceHeader = ({
           )}
         </DropdownMenuContent>
       </DropdownMenu>
+      <div className="flex items-center gap-0.5">
+        <ActionTooltip align="center" side="bottom" label="Filter">
+          <Button variant="transparent" size="iconSm">
+            <ListFilter className="size-4" />
+          </Button>
+        </ActionTooltip>
+        <ActionTooltip align="center" side="bottom" label="New Message">
+          <Button variant="transparent" size="iconSm">
+            <SquarePen className="size-4" />
+          </Button>
+        </ActionTooltip>
+      </div>
     </div>
   );
 };
