@@ -4,9 +4,9 @@ import "./globals.css";
 
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
 import { ConvexClientProvider } from "../components/ConvexClientProvider";
-import { CreateWorkspaceModal } from "@/features/workspaces/components/CreateWorkspaceModal";
 import { Modals } from "@/components/modals";
 import { Toaster } from "sonner";
+import { JotaiProvider } from "@/components/JotaiProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,9 +25,11 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <ConvexClientProvider>
-            <Modals />
-            <Toaster position="top-right" />
-            {children}
+            <JotaiProvider>
+              <Modals />
+              <Toaster position="top-right" />
+              {children}
+            </JotaiProvider>
           </ConvexClientProvider>
         </body>
       </html>
