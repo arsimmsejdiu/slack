@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { WorkspaceTexts } from "@/models/WorkspaceText";
 import { TrashIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -34,9 +35,9 @@ export const PreferencesModal = ({
         <div className="px-4 pb-4 flex flex-col gap-y-2">
           <div className="px-5 py-4 bg-white rounded-lg border cursor-pointer hover:bg-gray-50">
             <div className="flex items-center justify-between">
-              <p className="text-sm font-semibold">Workspace name</p>
+              <p className="text-sm font-semibold">{WorkspaceTexts.workspaceName}</p>
               <p className="text-sm text-[#1264a3] hover:underline font-semibold">
-                Edit
+                {WorkspaceTexts.workspaceEdit}
               </p>
             </div>
             <p className="text-xs text-muted-foreground">{value}</p>
@@ -47,7 +48,7 @@ export const PreferencesModal = ({
             className="flex items-center gap-x-2 px-5 py-4 bg-white rounded-lg border cursor-pointer hover:bg-gray-50 text-rose-600"
           >
             <TrashIcon className="size-4" />
-            <span className="text-sm font-semibold">Delete workspace</span>
+            <span className="text-sm font-semibold">{WorkspaceTexts.workspaceDelete}</span>
           </button>
         </div>
       </DialogContent>
