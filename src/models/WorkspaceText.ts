@@ -7,4 +7,7 @@ export const WorkspaceTexts = {
     workspaceDelete: "Delete workspace",
     workspaceDeleteConfirm: "Are you sure you want to delete this workspace?",
     workspaceEdit: "Edit",
+    workspaceRename: "Rename this workspace",
+    workspaceCancel: "Cancel",
+    workspaceSave: "Save",
 }
