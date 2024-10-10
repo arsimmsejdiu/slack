@@ -13,5 +13,7 @@ export const WorkspaceTexts = {
     workspaceAdd: "Add workspace",
     workspacePlaceholder: "Workspace name e.g. 'My Workspace', 'My Company'",
     workspaceSuccessfull: "Workspace created successfully",
-    workspaceError: "Failed to create workspace"
+    workspaceError: "Failed to create workspace",
+    workspaceRemoved: "Workspace removed successfully",
+    workspaceRemoveError: "Failed to remove workspace"
 }

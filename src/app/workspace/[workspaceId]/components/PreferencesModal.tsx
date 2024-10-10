@@ -17,6 +17,7 @@ import { useWorkspaceId } from "@/hooks/UseWorkspaceId";
 import { toast } from "sonner";
 import { PreferencesModalProps } from "@/models/interfaces/WorkspaceInterface";
 import { EditWorkspaceNameDialog } from "./EditWorkspaceNameDialog";
+import { useRouter } from "next/navigation";
 
 export const PreferencesModal = ({
   open,
@@ -24,6 +25,7 @@ export const PreferencesModal = ({
   initialValue,
 }: PreferencesModalProps) => {
   const workspaceId = useWorkspaceId();
+  const router = useRouter();
 
   const [value, setValue] = useState(initialValue);
   const [isEditing, setIsEditing] = useState(false);
@@ -32,6 +34,23 @@ export const PreferencesModal = ({
     useUpdateWorkspace();
   const { mutate: deleteWorkspace, isPending: isDeletingWorkspace } =
     useDeleteWorkspace();
+
+  const handleRemove = () => {
+    deleteWorkspace(
+      {
+        workspaceId: workspaceId,
+      },
+      {
+        onSuccess: () => {
+          router.replace("/");
+          toast.success(WorkspaceTexts.workspaceRemoved);
+        },
+        onError: () => {
+          toast.error(WorkspaceTexts.workspaceRemoveError);
+        },
+      }
+    );
+  };
 
   const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,8 +61,8 @@ export const PreferencesModal = ({
       },
       {
         onSuccess: () => {
-          setIsEditing(false);
           toast.success(WorkspaceTexts.workspaceSuccessfull);
+          setIsEditing(false);
         },
         onError: () => {
           toast.error(WorkspaceTexts.workspaceError);
@@ -68,8 +87,8 @@ export const PreferencesModal = ({
             handleEdit={handleEdit}
           />
           <button
-            disabled={false}
-            onClick={() => {}}
+            disabled={isDeletingWorkspace}
+            onClick={handleRemove}
             className="flex items-center gap-x-2 px-5 py-4 bg-white rounded-lg border cursor-pointer hover:bg-gray-50 text-rose-600"
           >
             <TrashIcon className="size-4" />
