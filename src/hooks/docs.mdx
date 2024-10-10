@@ -1,0 +1,15 @@
+const [promise, setPromise] = useState<{resolve: (value: boolean) => void} | null>(null);
+ ##Explenation
+This line is using React's useState hook to create a state variable called promise and its corresponding setter function setPromise. Let's break it down:
+1. useState: This is a React hook used for adding state to functional components.
+2. The type annotation <{resolve: (value: boolean) => void} | null> specifies the shape of the state:
+    It can either be an object with a resolve property, or null.
+    he resolve property is a function that takes a boolean value and returns void.
+3. The initial value of the state is set to null.
+4. promise: This will hold either the object with the resolve function or null.
+5. setPromise: This is the function used to update the promise state.
+The purpose of this state is likely to handle asynchronous confirmation dialogs. 
+The resolve function would be used to resolve a Promise when the user makes a choice in the confirmation dialog. 
+By storing this in the component's state, it allows the component to "remember" the Promise that needs to be resolved, even across re-renders.
+This setup is part of a custom hook (useConfirm) that seems to be implementing a confirmation dialog functionality. 
+The promise state would be used to control the visibility of the dialog and to resolve the confirmation action when the user makes a choice.
