@@ -18,6 +18,7 @@ import { toast } from "sonner";
 import { PreferencesModalProps } from "@/models/interfaces/WorkspaceInterface";
 import { EditWorkspaceNameDialog } from "./EditWorkspaceNameDialog";
 import { useRouter } from "next/navigation";
+import { useConfirm } from "@/hooks/UseConfirm";
 
 export const PreferencesModal = ({
   open,
@@ -25,6 +26,10 @@ export const PreferencesModal = ({
   initialValue,
 }: PreferencesModalProps) => {
   const workspaceId = useWorkspaceId();
+  const [ConfirmDialog, Confirm] = useConfirm(
+    "Delete Workspace",
+    "Are you sure you want to delete this workspace?"
+  );
   const router = useRouter();
 
   const [value, setValue] = useState(initialValue);
@@ -35,7 +40,10 @@ export const PreferencesModal = ({
   const { mutate: deleteWorkspace, isPending: isDeletingWorkspace } =
     useDeleteWorkspace();
 
-  const handleRemove = () => {
+  const handleRemove = async () => {
+    const ok = await Confirm();
+    if (!ok) return;
+
     deleteWorkspace(
       {
         workspaceId: workspaceId,
@@ -72,32 +80,35 @@ export const PreferencesModal = ({
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="p-0 bg-gray-50 overflow-hidden">
-        <DialogHeader className="p-4 border-b bg-white">
-          <DialogTitle>{value}</DialogTitle>
-        </DialogHeader>
-        <div className="px-4 pb-4 flex flex-col gap-y-2">
-          <EditWorkspaceNameDialog
-            isEditing={isEditing}
-            setIsEditing={setIsEditing}
-            value={value}
-            setValue={setValue}
-            isUpdatingWorkspace={isUpdatingWorkspace}
-            handleEdit={handleEdit}
-          />
-          <button
-            disabled={isDeletingWorkspace}
-            onClick={handleRemove}
-            className="flex items-center gap-x-2 px-5 py-4 bg-white rounded-lg border cursor-pointer hover:bg-gray-50 text-rose-600"
-          >
-            <TrashIcon className="size-4" />
-            <span className="text-sm font-semibold">
-              {WorkspaceTexts.workspaceDelete}
-            </span>
-          </button>
-        </div>
-      </DialogContent>
-    </Dialog>
+    <>
+      <ConfirmDialog />
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="p-0 bg-gray-50 overflow-hidden">
+          <DialogHeader className="p-4 border-b bg-white">
+            <DialogTitle>{value}</DialogTitle>
+          </DialogHeader>
+          <div className="px-4 pb-4 flex flex-col gap-y-2">
+            <EditWorkspaceNameDialog
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+              value={value}
+              setValue={setValue}
+              isUpdatingWorkspace={isUpdatingWorkspace}
+              handleEdit={handleEdit}
+            />
+            <button
+              disabled={isDeletingWorkspace}
+              onClick={handleRemove}
+              className="flex items-center gap-x-2 px-5 py-4 bg-white rounded-lg border cursor-pointer hover:bg-gray-50 text-rose-600"
+            >
+              <TrashIcon className="size-4" />
+              <span className="text-sm font-semibold">
+                {WorkspaceTexts.workspaceDelete}
+              </span>
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
