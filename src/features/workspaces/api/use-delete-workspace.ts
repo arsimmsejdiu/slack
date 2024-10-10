@@ -3,24 +3,15 @@ import { useCallback, useMemo, useState } from "react";
 
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
+import { Options, ResponseType, Status } from "@/models/types/FeaturesTypes";
 
 type RequestType = { workspaceId: Id<"workspaces">};
-type ResponseType = Id<"workspaces"> | null;
-
-type Options = {
-  onSuccess?: (data: ResponseType) => void;
-  onError?: (error: Error) => void;
-  onSettled?: () => void;
-  throwOnError?: boolean;
-};
 
 export const useDeleteWorkspace = () => {
   const [data, setData] = useState<ResponseType>(null);
   const [error, setError] = useState<Error | null>(null);
 
-  const [status, setStatus] = useState<
-    "settled" | "pending" | "success" | "error" | null
-  >(null);
+  const [status, setStatus] = useState<Status>(null);
 
   const isPending = useMemo(() => status === "pending", [status]);
   const isSettled = useMemo(() => status === "settled", [status]);

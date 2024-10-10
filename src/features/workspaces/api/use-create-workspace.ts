@@ -2,26 +2,14 @@ import { useMutation } from "convex/react";
 import { useCallback, useMemo, useState } from "react";
 
 import { api } from "../../../../convex/_generated/api";
-import { Id } from "../../../../convex/_generated/dataModel";
-
-type RequestType = { name: string };
-type ResponseType = Id<"workspaces"> | null;
-
-type Options = {
-  onSuccess?: (data: ResponseType) => void;
-  onError?: (error: Error) => void;
-  onSettled?: () => void;
-  throwOnError?: boolean;
-};
+import { Options, RequestType, ResponseType, Status } from "@/models/types/FeaturesTypes";
 
 export const useCreateWorkspace = () => {
   const [data, setData] = useState<ResponseType>(null);
   const [error, setError] = useState<Error | null>(null);
 
-  const [status, setStatus] = useState<
-    "settled" | "pending" | "success" | "error" | null
-  >(null);
-
+  const [status, setStatus] = useState<Status>(null);
+ 
   const isPending = useMemo(() => status === "pending", [status]);
   const isSettled = useMemo(() => status === "settled", [status]);
   const isSuccess = useMemo(() => status === "success", [status]);

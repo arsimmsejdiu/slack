@@ -1,10 +1,6 @@
 import { useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
-import { Id } from "../../../../convex/_generated/dataModel";
-
-interface UseGetWorkspaceProps {
-  workspaceId: Id<"workspaces">;
-}
+import { UseGetWorkspaceProps } from "@/models/interfaces/FeaturesInterfaces";
 
 export const useGetWorkspace = ({ workspaceId }: UseGetWorkspaceProps) => {
   const data = useQuery(api.workspaces.getById, { workspaceId });

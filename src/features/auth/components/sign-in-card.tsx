@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 
-import { SignInUpState } from "../types";
+import { SignInUpState } from "../../../models/types/types";
 
 export const SignInCard = ({ setState }: SignInUpState) => {
   const { signIn } = useAuthActions();
