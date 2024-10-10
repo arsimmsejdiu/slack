@@ -20,12 +20,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useWorkspaceId } from "@/hooks/UseWorkspaceId";
 import { toast } from "sonner";
-
-interface PreferencesModalProps {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-  initialValue: string;
-}
+import { PreferencesModalProps } from "@/models/interfaces/WorkspaceInterface";
 
 export const PreferencesModal = ({
   open,

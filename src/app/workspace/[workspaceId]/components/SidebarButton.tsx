@@ -1,14 +1,7 @@
 import { ActionTooltip } from "@/components/ActionTooltip";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
-import { IconType } from "react-icons/lib";
-
-interface SidebarButtonProps {
-  icon: LucideIcon | IconType;
-  label: string;
-  isActive?: boolean;
-}
+import { SidebarButtonProps } from "@/models/interfaces/WorkspaceInterface";
 
 const SidebarButton = ({ icon: Icon, label, isActive }: SidebarButtonProps) => {
   return (

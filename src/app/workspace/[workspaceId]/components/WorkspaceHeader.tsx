@@ -6,17 +6,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Doc } from "../../../../../convex/_generated/dataModel";
 import { ChevronDown, ListFilter, SquarePen } from "lucide-react";
 import { WorkspaceTexts } from "@/models/WorkspaceText";
 import { ActionTooltip } from "@/components/ActionTooltip";
 import { PreferencesModal } from "./PreferencesModal";
 import { useState } from "react";
-
-interface WorkspaceHeaderProps {
-  workspace: Doc<"workspaces">;
-  isAdmin: boolean;
-}
+import { WorkspaceHeaderProps } from "@/models/interfaces/WorkspaceInterface";
 
 export const WorkspaceHeader = ({
   workspace,
