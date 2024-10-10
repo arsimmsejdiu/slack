@@ -10,4 +10,8 @@ export const WorkspaceTexts = {
     workspaceRename: "Rename this workspace",
     workspaceCancel: "Cancel",
     workspaceSave: "Save",
+    workspaceAdd: "Add workspace",
+    workspacePlaceholder: "Workspace name e.g. 'My Workspace', 'My Company'",
+    workspaceSuccessfull: "Workspace created successfully",
+    workspaceError: "Failed to create workspace"
 }

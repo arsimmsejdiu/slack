@@ -7,20 +7,16 @@ import { useUpdateWorkspace } from "@/features/workspaces/api/use-update-workspa
 import {
   Dialog,
   DialogContent,
-  DialogClose,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 
 import { WorkspaceTexts } from "@/models/WorkspaceText";
 import { TrashIcon } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { useWorkspaceId } from "@/hooks/UseWorkspaceId";
 import { toast } from "sonner";
 import { PreferencesModalProps } from "@/models/interfaces/WorkspaceInterface";
+import { EditWorkspaceNameDialog } from "./EditWorkspaceNameDialog";
 
 export const PreferencesModal = ({
   open,
@@ -39,19 +35,22 @@ export const PreferencesModal = ({
 
   const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updateWorkspace({ 
-      workspaceId: workspaceId,
-      name: value
-    }, {
-      onSuccess: () => {
-        setIsEditing(false);
-        toast.success("Workspace updated successfully")
+    updateWorkspace(
+      {
+        workspaceId: workspaceId,
+        name: value,
       },
-      onError: () => {
-        toast.error("Failed to update workspace")
+      {
+        onSuccess: () => {
+          setIsEditing(false);
+          toast.success(WorkspaceTexts.workspaceSuccessfull);
+        },
+        onError: () => {
+          toast.error(WorkspaceTexts.workspaceError);
+        },
       }
-    });
-  }
+    );
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -60,48 +59,14 @@ export const PreferencesModal = ({
           <DialogTitle>{value}</DialogTitle>
         </DialogHeader>
         <div className="px-4 pb-4 flex flex-col gap-y-2">
-          <Dialog open={isEditing} onOpenChange={setIsEditing}>
-            <DialogTrigger asChild>
-              <div className="px-5 py-4 bg-white rounded-lg border cursor-pointer hover:bg-gray-50">
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-semibold">
-                    {WorkspaceTexts.workspaceName}
-                  </p>
-                  <p className="text-sm text-[#1264a3] hover:underline font-semibold">
-                    {WorkspaceTexts.workspaceEdit}
-                  </p>
-                </div>
-                <p className="text-xs text-muted-foreground">{value}</p>
-              </div>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>{WorkspaceTexts.workspaceRename}</DialogTitle>
-              </DialogHeader>
-              <form onSubmit={handleEdit} className="space-y-4">
-                <Input 
-                  value={value}
-                  disabled={isUpdatingWorkspace}
-                  onChange={(e) => setValue(e.target.value)}
-                  placeholder={WorkspaceTexts.workspaceName}
-                  required
-                  autoFocus
-                  minLength={3}
-                  maxLength={80}
-                />
-                <DialogFooter>
-                  <DialogClose asChild>
-                    <Button variant="outline" disabled={isUpdatingWorkspace}>
-                      {WorkspaceTexts.workspaceCancel}
-                    </Button>
-                  </DialogClose>
-                  <Button variant="outline" disabled={isUpdatingWorkspace}>
-                      {WorkspaceTexts.workspaceSave}
-                    </Button>
-                </DialogFooter>
-              </form>
-            </DialogContent>
-          </Dialog>
+          <EditWorkspaceNameDialog
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
+            value={value}
+            setValue={setValue}
+            isUpdatingWorkspace={isUpdatingWorkspace}
+            handleEdit={handleEdit}
+          />
           <button
             disabled={false}
             onClick={() => {}}

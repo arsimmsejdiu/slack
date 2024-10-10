@@ -12,9 +12,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-import {useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { WorkspaceTexts } from "@/models/WorkspaceText";
 
 export const CreateWorkspaceModal = () => {
   const router = useRouter();
@@ -29,25 +30,28 @@ export const CreateWorkspaceModal = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    mutate({ name: name}, {
-      onSuccess: (id) => {
-        toast.success("Workspace created successfully");
-        router.push(`/workspace/${id}`);
-        handleClose();
-      },
-    });
+
+    mutate(
+      { name: name },
+      {
+        onSuccess: (id) => {
+          toast.success("Workspace created successfully");
+          router.push(`/workspace/${id}`);
+          handleClose();
+        },
+      }
+    );
   };
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add a Workspace</DialogTitle>
+          <DialogTitle>{WorkspaceTexts.workspaceAdd}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
-            placeholder="Workspace name e.g. 'My Workspace', 'My Company'"
+            placeholder={WorkspaceTexts.workspacePlaceholder}
             value={name}
             onChange={(e) => setName(e.target.value)}
             disabled={isPending}
@@ -55,8 +59,7 @@ export const CreateWorkspaceModal = () => {
             autoFocus
             minLength={3}
           />
-
-          <div className=" flex justify-end">
+          <div className="flex justify-end">
             <Button disabled={isPending} type="submit">
               Create
             </Button>
