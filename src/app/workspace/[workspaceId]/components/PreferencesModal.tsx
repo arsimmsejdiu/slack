@@ -27,8 +27,8 @@ export const PreferencesModal = ({
 }: PreferencesModalProps) => {
   const workspaceId = useWorkspaceId();
   const [ConfirmDialog, Confirm] = useConfirm(
-    "Delete Workspace",
-    "Are you sure you want to delete this workspace?"
+    WorkspaceTexts.workspaceDeleteTitle,
+    WorkspaceTexts.workspaceDeleteDescription
   );
   const router = useRouter();
 

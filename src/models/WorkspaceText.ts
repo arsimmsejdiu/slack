@@ -15,5 +15,7 @@ export const WorkspaceTexts = {
     workspaceSuccessfull: "Workspace created successfully",
     workspaceError: "Failed to create workspace",
     workspaceRemoved: "Workspace removed successfully",
-    workspaceRemoveError: "Failed to remove workspace"
+    workspaceRemoveError: "Failed to remove workspace",
+    workspaceDeleteTitle: "Delete Workspace",
+    workspaceDeleteDescription: "Are you sure you want to delete this workspace? ",
 }
