@@ -17,16 +17,7 @@ const schema = defineSchema({
     .index("by_user_id", ["userId"])
     .index("by_workspace_id", ["workspaceId"])
     .index("by_workspace_id_user_id", ["workspaceId", "userId"]),
-  // documents: defineTable({
-  //   title: v.string(),
-  //   content: v.string(),
-  //   workspaceId: v.id("workspaces"),
-  // }),
-  // comments: defineTable({
-  //   content: v.string(),
-  //   documentId: v.id("documents"),
-  //   userId: v.id("users"),
-  // })
+  
 });
 
 export default schema;

@@ -5,6 +5,8 @@ import { WorkspaceHeader } from "./WorkspaceHeader";
 import { WorkspaceTexts } from "@/models/WorkspaceText";
 import { LoadingState } from "@/components/Loading";
 import { ErrorState } from "@/components/Error";
+import { MessageSquareText } from "lucide-react";
+import { SidebarItem } from "./SidebarItem";
 
 export const WorkspaceSidebar = () => {
   const workspaceId = useWorkspaceId();
@@ -29,6 +31,9 @@ export const WorkspaceSidebar = () => {
         workspace={workspace}
         isAdmin={member.role === "admin"}
       />
+      <div className="flex flex-col px-2 mt-3">
+        <SidebarItem label="Threads" icon={MessageSquareText} id="threads" />
+      </div>
     </div>
   );
 };
