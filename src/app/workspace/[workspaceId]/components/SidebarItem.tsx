@@ -19,8 +19,8 @@ export const SidebarItem = ({ label, Icon, id, variant }: SidebarItemProps) => {
       onClick={() => {}} // TODO: function when clicked opensup the channel messages
     >
       <Link href={`/workspace/${workspaceId}/channel/${id}`}>
-        <Icon />
-        <span>{label}</span>
+        <Icon className="size-3.5 mr-1 shrink-0"/>
+        <span className="text-s, truncate">{label}</span>
       </Link>
     </Button>
   );

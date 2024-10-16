@@ -5,7 +5,7 @@ import { WorkspaceHeader } from "./WorkspaceHeader";
 import { WorkspaceTexts } from "@/models/WorkspaceText";
 import { LoadingState } from "@/components/Loading";
 import { ErrorState } from "@/components/Error";
-import { MessageSquareText } from "lucide-react";
+import { MessageSquareText, SendHorizonal } from "lucide-react";
 import { SidebarItem } from "./SidebarItem";
 
 export const WorkspaceSidebar = () => {
@@ -33,6 +33,7 @@ export const WorkspaceSidebar = () => {
       />
       <div className="flex flex-col px-2 mt-3">
         <SidebarItem label="Threads" Icon={MessageSquareText} id="threads" />
+        <SidebarItem label="Draft & Sent" Icon={SendHorizonal} id="drafts" />
       </div>
     </div>
   );
