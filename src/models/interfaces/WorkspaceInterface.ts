@@ -1,10 +1,18 @@
 import { LucideIcon } from "lucide-react";
 import { IconType } from "react-icons/lib";
 import { Doc } from "../../../convex/_generated/dataModel";
+import { SidebarItemVariantProps } from "../Variants";
 
 export interface WorkspaceHeaderProps {
   workspace: Doc<"workspaces">;
   isAdmin: boolean;
+}
+
+export interface SidebarItemProps {
+  label: string;
+  Icon: LucideIcon | IconType;
+  id: string;
+  variant?: SidebarItemVariantProps
 }
 
 export interface PreferencesModalProps {
