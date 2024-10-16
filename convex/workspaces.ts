@@ -33,6 +33,13 @@ export const create = mutation({
       }),
     ]);
 
+    await Promise.all([
+      ctx.db.insert("channels", {
+        name: "general",
+        workspaceId,
+      }),
+    ])
+
     return workspaceId;
   },
 });
