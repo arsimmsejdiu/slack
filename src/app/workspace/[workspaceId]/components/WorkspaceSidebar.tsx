@@ -40,21 +40,17 @@ export const WorkspaceSidebar = () => {
       <div className="flex flex-col px-2 mt-3">
         <SidebarItem label="Threads" Icon={MessageSquareText} id="threads" />
         <SidebarItem label="Draft & Sent" Icon={SendHorizonal} id="drafts" />
-        <WorkspaceSection
-          label="Channels"
-          hint="New Channel"
-          onNew={() => {}}
-        >
-          {channels?.map((item) => (
-            <SidebarItem
-              key={item._id}
-              label={item.name}
-              Icon={HashIcon}
-              id={item._id}
-            />
-          ))}    
-        </WorkspaceSection>
       </div>
+      <WorkspaceSection label="Channels" hint="New Channel" onNew={() => {}}>
+        {channels?.map((item) => (
+          <SidebarItem
+            key={item._id}
+            label={item.name}
+            Icon={HashIcon}
+            id={item._id}
+          />
+        ))}
+      </WorkspaceSection>
     </div>
   );
 };
