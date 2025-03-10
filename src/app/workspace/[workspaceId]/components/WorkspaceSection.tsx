@@ -13,7 +13,7 @@ const WorkspaceSection = ({
   onNew,
   children,
 }: WorkspaceSectionProps) => {
-  const [on, toggle] = useToggle(false);
+  const [on, toggle] = useToggle(true);
 
   return (
     <div className="flex flex-col mt-3 px-2">
