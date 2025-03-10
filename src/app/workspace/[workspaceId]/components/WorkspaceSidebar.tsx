@@ -18,10 +18,18 @@ import { UserItem } from "./UserItem";
 export const WorkspaceSidebar = () => {
   const workspaceId = useWorkspaceId();
 
-  const { data: member, isLoading: memberLoading } = useCurrentMember({ workspaceId })
-  const { data: workspace, isLoading: workspaceLoading } = useGetWorkspace({ workspaceId });
-  const { data: channels, isLoading: channelLoading } = useGetChannels({ workspaceId });
-  const { data: members, isLoading: membersLoading } = useGetMembers({ workspaceId });
+  const { data: member, isLoading: memberLoading } = useCurrentMember({
+    workspaceId,
+  });
+  const { data: workspace, isLoading: workspaceLoading } = useGetWorkspace({
+    workspaceId,
+  });
+  const { data: channels, isLoading: channelLoading } = useGetChannels({
+    workspaceId,
+  });
+  const { data: members, isLoading: membersLoading } = useGetMembers({
+    workspaceId,
+  });
 
   if (workspaceLoading || memberLoading) {
     return <LoadingState />;
@@ -51,15 +59,19 @@ export const WorkspaceSidebar = () => {
           />
         ))}
       </WorkspaceSection>
-      <WorkspaceSection label="Direct Messages" hint="New direct message" onNew={() => {}}>
+      <WorkspaceSection
+        label="Direct Messages"
+        hint="New direct message"
+        onNew={() => {}}
+      >
         {members?.map((item) => (
-        <UserItem 
-          key={item._id}
-          id={item._id}
-          label={item.user.name}
-          image={item.user.image}
-        />
-      ))}
+          <UserItem
+            key={item._id}
+            id={item._id}
+            label={item.user.name}
+            image={item.user.image}
+          />
+        ))}
       </WorkspaceSection>
     </div>
   );
