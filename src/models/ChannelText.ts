@@ -8,4 +8,5 @@ export const ChannelText = {
   close: "Close",
   newCodeSuccess: "New code generated successfully",
   newCodeError: "Failed to regenerate new code",
+  backHome: "Back to home",
 };
