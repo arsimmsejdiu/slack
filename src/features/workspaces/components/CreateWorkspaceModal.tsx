@@ -1,6 +1,6 @@
 "use client";
 
-import { useCreateWorkspaceModal } from "../store/UseCreateModal";
+import { useCreateWorkspaceModal } from "../store/UseCreateWorkspaceModal";
 import { useCreateWorkspace } from "../api/use-create-workspace";
 
 import {

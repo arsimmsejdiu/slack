@@ -10,7 +10,7 @@ import {
 
 import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
 import { useGetWorkspaces } from "@/features/workspaces/api/use-get-workspaces";
-import { useCreateWorkspaceModal } from "@/features/workspaces/store/UseCreateModal";
+import { useCreateWorkspaceModal } from "@/features/workspaces/store/UseCreateWorkspaceModal";
 import { useWorkspaceId } from "@/hooks/UseWorkspaceId";
 import { useRouter } from "next/navigation";
 

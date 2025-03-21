@@ -10,5 +10,3 @@ export type Options = {
   onSettled?: () => void;
   throwOnError?: boolean;
 };
-
-export type Status = "settled" | "pending" | "success" | "error" | null;

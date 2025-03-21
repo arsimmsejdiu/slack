@@ -12,6 +12,7 @@ import { ActionTooltip } from "@/components/ActionTooltip";
 import { PreferencesModal } from "./PreferencesModal";
 import { useState } from "react";
 import { WorkspaceHeaderProps } from "@/models/interfaces/WorkspaceInterface";
+import { InviteModal } from "./InviteModal";
 
 export const WorkspaceHeader = ({
   workspace,
@@ -21,6 +22,7 @@ export const WorkspaceHeader = ({
 
   return (
     <>
+    <InviteModal />
     <PreferencesModal 
         open={preferencesOpen}
         setOpen={setPreferencesOpen}
