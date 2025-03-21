@@ -212,7 +212,7 @@ export const join = mutation({
       throw new Error("Workspace not found");
     }
 
-    if (workspace.joinCode !== args.joinCode) {
+    if (workspace.joinCode !== args.joinCode.toLocaleLowerCase()) {
       throw new Error("Invalid join code");
     }
 
@@ -229,10 +229,10 @@ export const join = mutation({
 
     await ctx.db.insert("members", {
       userId,
-      workspaceId: args.workspaceId,
+      workspaceId: workspace._id,
       role: "member",
     });
 
-    return args.workspaceId;
+    return workspace._id;
   },
 });
