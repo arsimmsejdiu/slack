@@ -21,7 +21,7 @@ export const InviteModal = ({
   joinCode,
 }: InviteModalProps) => {
   const workspaceId = useWorkspaceId();
- // TODO: develop the rout to handle the join workspace 
+  // TODO: develop the rout to handle the join workspace
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
