@@ -3,7 +3,8 @@ import { useCallback, useMemo, useState } from "react";
 
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
-import { Options, ResponseType, Status } from "@/models/types/FeaturesWorkspaceTypes";
+import { Options, ResponseType } from "@/models/types/FeaturesWorkspaceTypes";
+import { Status } from "@/models/types/StatusType";
 
 type RequestType = { workspaceId: Id<"workspaces">};
 

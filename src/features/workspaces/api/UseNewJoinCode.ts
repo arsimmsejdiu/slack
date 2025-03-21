@@ -6,9 +6,9 @@ import { Id } from "../../../../convex/_generated/dataModel";
 import { Options, ResponseType } from "@/models/types/FeaturesWorkspaceTypes";
 import { Status } from "@/models/types/StatusType";
 
-type RequestType = { workspaceId: Id<"workspaces">; name: string };
+type RequestType = { workspaceId: Id<"workspaces"> };
 
-export const useUpdateWorkspace = () => {
+export const useNewJoinCode = () => {
   const [data, setData] = useState<ResponseType>(null);
   const [error, setError] = useState<Error | null>(null);
 
@@ -19,7 +19,7 @@ export const useUpdateWorkspace = () => {
   const isSuccess = useMemo(() => status === "success", [status]);
   const isError = useMemo(() => status === "error", [status]);
 
-  const mutation = useMutation(api.workspaces.update);
+  const mutation = useMutation(api.workspaces.newJoinCode);
 
   const mutate = useCallback(
     async (values: RequestType, options?: Options) => {
