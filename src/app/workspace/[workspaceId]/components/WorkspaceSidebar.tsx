@@ -11,12 +11,14 @@ import WorkspaceSection from "./WorkspaceSection";
 import { WorkspaceHeader } from "./WorkspaceHeader";
 
 import { useWorkspaceId } from "@/hooks/UseWorkspaceId";
+import {useChannelId} from "@/hooks/UseChannelId";
 import { WorkspaceTexts } from "@/models/WorkspaceText";
 import { LoadingState } from "@/components/Loading";
 import { ErrorState } from "@/components/Error";
 import { UserItem } from "./UserItem";
 
 export const WorkspaceSidebar = () => {
+  const channelId = useChannelId();
   const workspaceId = useWorkspaceId();
   const [_open, setOpen] = useCreateChannelModal();
 
@@ -62,6 +64,7 @@ export const WorkspaceSidebar = () => {
             label={item.name}
             Icon={HashIcon}
             id={item._id}
+            variant={channelId === item._id ? "active" : "default"}
           />
         ))}
       </WorkspaceSection>

@@ -24,7 +24,7 @@ const JoinPage = () => {
   const { data, isLoading } = useGetWorkspaceInfo({ workspaceId });
   const { mutate, isPending } = useJoin();
 
-  const isMember = useMemo(() => data?.isMember ?? false, [data?.isMember]);
+  const isMember = useMemo(() => data?.isMember, [data?.isMember]);
 
   useEffect(() => {
     if (isMember) {
