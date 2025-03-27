@@ -1,4 +1,5 @@
 export const ChannelText = {
+  join: "Join",
   addChannel: "Add a channel",
   channelPlaceholder: "e.g plan-budget",
   createChannel: "Create Channel",
@@ -9,4 +10,6 @@ export const ChannelText = {
   newCodeSuccess: "New code generated successfully",
   newCodeError: "Failed to regenerate new code",
   backHome: "Back to home",
+  joinSuccess: "Successfully joined the workspace",
+  joinError: "Failed to join the workspace",
 };

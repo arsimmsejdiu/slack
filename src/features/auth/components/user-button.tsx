@@ -10,13 +10,20 @@ import {
 import { useCurrentUser } from "../api/UseCurrentUser";
 import { Loader, LogOut } from "lucide-react";
 import { useAuthActions } from "@convex-dev/auth/react";
+import { useRouter } from "next/navigation";
 
 export const UserButton = () => {
+  const router = useRouter();
   const { signOut } = useAuthActions();
   const { data, isLoading } = useCurrentUser();
 
+  const handleSignOut = async () => {
+    await signOut();
+    router.replace("/auth");
+  };
+
   if (isLoading) {
-    return <Loader className="space-4 animate-spin text-muted-foreground" />;
+    return <Loader className=" flex flex-col items-center justify-center space-4 animate-spin text-muted-foreground" />;
   }
 
   if (!data) {
@@ -35,12 +42,10 @@ export const UserButton = () => {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="center" side="right" className="w-60">
-        <DropdownMenuItem onClick={() => signOut()} className="h-10 cursor-pointer">
+        <DropdownMenuItem onClick={handleSignOut} className="h-10 cursor-pointer">
           <LogOut className="size-4 mr-4" />
           Logout
         </DropdownMenuItem>
-        <DropdownMenuItem>Settings</DropdownMenuItem>
-        <DropdownMenuItem>Logout</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
