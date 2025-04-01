@@ -2,6 +2,10 @@ import { Id } from "../../../convex/_generated/dataModel";
 
 export type RequestType = { name: string; workspaceId: Id<"workspaces"> };
 
+export type RequestUpdateType = { name: string; id: Id<"channels"> };
+
+export type RequestDeleteType = { id: Id<"channels"> };
+
 export type ResponseType = Id<"channels"> | null;
 
 export type Options = {
@@ -10,4 +14,3 @@ export type Options = {
   onSettled?: () => void;
   throwOnError?: boolean;
 };
-
