@@ -22,7 +22,7 @@ const Editor = ({
   innerRef,
 }: IEditorProps) => {
   const [text, setText] = useState<string>("");
-  const [isToolbarVisible, setToolbarVisible] = useState<boolean>(false);
+  const [isToolbarVisible, setToolbarVisible] = useState<boolean>(true);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const submitRef = useRef(onSubmit);
@@ -111,7 +111,7 @@ const Editor = ({
       <div className="flex flex-col border border-slate-200 rounded-md overflow-hidden focus-within:border-slate-300 focus-within:shadow-sm transition bg-white">
         <div ref={containerRef} className="h-fiull ql-custom" />
         <div className="flex px-2 pb-2 z-[5]">
-          <ActionTooltip label={isToolbarVisible ? "Show Toolbar" : "Hide Toolbar"}>
+          <ActionTooltip label={isToolbarVisible ? "Hide Toolbar" : "Show Toolbar"}>
             <Button
               disabled={disabled}
               size="iconSm"
