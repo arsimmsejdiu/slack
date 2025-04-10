@@ -5,12 +5,14 @@ import { PiTextAa } from "react-icons/pi";
 import { ImageIcon, Smile } from "lucide-react";
 
 import { Button } from "./ui/button";
+import { EmojiPopover } from "./EmojiPopover";
 import { ActionTooltip } from "./ActionTooltip";
 
 import { IEditorProps } from "@/models/interfaces/IEditor";
 import { cn, toggleToolbar } from "@/lib/utils";
 
 import "quill/dist/quill.snow.css";
+import { DisplayImage } from "./DisplayImage";
 
 const Editor = ({
   variant = "create",
@@ -22,6 +24,7 @@ const Editor = ({
   innerRef,
 }: IEditorProps) => {
   const [text, setText] = useState<string>("");
+  const [image, setImage] = useState<File | null>(null);
   const [isToolbarVisible, setToolbarVisible] = useState<boolean>(true);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -30,6 +33,7 @@ const Editor = ({
   const quillRef = useRef<Quill | null>(null);
   const defaultValueRef = useRef(defaultValue);
   const disabledRef = useRef(disabled);
+  const imageRef = useRef<HTMLInputElement>(null);
 
   useLayoutEffect(() => {
     submitRef.current = onSubmit;
@@ -104,14 +108,32 @@ const Editor = ({
     };
   }, [innerRef]);
 
+  const onEmojiSelect = (emoji: any) => {
+    const quill = quillRef.current;
+
+    quill?.insertText(quill?.getSelection()?.index || 0, emoji.native);
+  };
+
   const isEmpty = text.replace(/<(.|\n)*?>/g, "").trim().length === 0;
 
   return (
-    <div className="flex flex-col mb-5">
+    <div
+      className={variant === "update" ? "flex flex-col mb-5" : "flex flex-col"}
+    >
+      <input type="file" accept="image/*" ref={imageRef} onChange={(event) => setImage(event.target.files![0])} className="hidden"/>
       <div className="flex flex-col border border-slate-200 rounded-md overflow-hidden focus-within:border-slate-300 focus-within:shadow-sm transition bg-white">
-        <div ref={containerRef} className="h-fiull ql-custom" />
+        <div ref={containerRef} className="h-full ql-custom" />
+        {!!image && (
+          <DisplayImage 
+            image={image} 
+            setImage={setImage}
+            imageRef={imageRef}
+          />
+        )}
         <div className="flex px-2 pb-2 z-[5]">
-          <ActionTooltip label={isToolbarVisible ? "Hide Toolbar" : "Show Toolbar"}>
+          <ActionTooltip
+            label={isToolbarVisible ? "Hide Toolbar" : "Show Toolbar"}
+          >
             <Button
               disabled={disabled}
               size="iconSm"
@@ -122,23 +144,18 @@ const Editor = ({
             </Button>
           </ActionTooltip>
 
-          <ActionTooltip label="Emoji">
-            <Button
-              disabled={disabled}
-              size="iconSm"
-              variant="ghost"
-              onClick={() => {}}
-            >
+          <EmojiPopover onEmojiSelect={onEmojiSelect}>
+            <Button disabled={disabled} size="iconSm" variant="ghost">
               <Smile className="size-4" />
             </Button>
-          </ActionTooltip>
+          </EmojiPopover>
           {variant === "create" && (
             <ActionTooltip label="Image">
               <Button
                 disabled={disabled}
                 size="iconSm"
                 variant="ghost"
-                onClick={() => {}}
+                onClick={() => imageRef.current?.click()}
               >
                 <ImageIcon className="size-4" />
               </Button>
@@ -183,6 +200,18 @@ const Editor = ({
           )}
         </div>
       </div>
+      {variant === "create" && (
+        <div
+          className={cn(
+            "p-2 text-[10px] text-muted-foreground flex justify-end opacity-0 transition",
+            !isEmpty && "opacity-100"
+          )}
+        >
+          <p>
+            <strong>Shift + Return</strong> to add a new line
+          </p>
+        </div>
+      )}
     </div>
   );
 };

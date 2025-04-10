@@ -4,7 +4,7 @@ import { MutableRefObject } from "react";
 
 export interface IEditorProps {
   onSubmit: ({ image, body }: TEditorType) => void;
-  onCancel: () => void;
+  onCancel?: () => void;
   placeholder?: string;
   defaultValue?: Delta | Op[];
   disabled?: boolean;

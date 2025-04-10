@@ -12,7 +12,6 @@ export const ChatInput = ({placeholder}: {placeholder: string}) => {
       <Editor 
         placeholder={placeholder}
         onSubmit={() => {}}
-        onCancel={() => {}}
         disabled={false}
         defaultValue={[]}
         innerRef={editorRef}
